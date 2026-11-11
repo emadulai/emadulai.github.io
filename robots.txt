@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://emadulai.github.io/sitemap.xml
