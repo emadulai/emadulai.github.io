@@ -1,1 +1,417 @@
 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#111b36">
+<title>Image Converter - EmadulAi</title>
+<meta name="description" content="Convert JPG, PNG and WEBP images online for free with EmadulAi Image Converter.">
+
+<style>
+:root {
+  --bg:#f5f7fc;
+  --card:#fff;
+  --text:#172033;
+  --muted:#68748a;
+  --border:#e5e9f2;
+  --primary:#635bff;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:Arial,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+}
+header{
+  background:#111b36;
+  color:white;
+  padding:19px 5%;
+}
+.nav{
+  max-width:1100px;
+  margin:auto;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.logo{font-size:23px;font-weight:800}
+.logo span{color:#9992ff}
+.nav a{color:white;text-decoration:none;font-size:14px}
+.container{
+  width:min(760px,92%);
+  margin:45px auto;
+}
+.heading{text-align:center;margin-bottom:30px}
+.heading h1{font-size:32px;margin-bottom:8px}
+.heading p{color:var(--muted);font-size:14px}
+.converter{
+  background:var(--card);
+  border:1px solid var(--border);
+  padding:25px;
+  border-radius:17px;
+  box-shadow:0 8px 30px #1720330a;
+}
+.upload{
+  border:2px dashed #c8c8ed;
+  border-radius:13px;
+  padding:38px 15px;
+  text-align:center;
+  background:#f9f9ff;
+  cursor:pointer;
+}
+.upload svg{width:45px;height:45px;color:var(--primary)}
+.upload h3{margin:10px 0 5px;font-size:18px}
+.upload p{font-size:13px;color:var(--muted)}
+.upload input{display:none}
+.select-btn,.convert-btn,.download-btn{
+  display:inline-block;
+  border:0;
+  border-radius:9px;
+  background:var(--primary);
+  color:white;
+  padding:12px 20px;
+  font-weight:700;
+  cursor:pointer;
+  text-decoration:none;
+}
+.select-btn{margin-top:17px}
+.settings{margin-top:25px}
+.field{margin-bottom:20px}
+.field label{
+  display:block;
+  font-size:14px;
+  font-weight:700;
+  margin-bottom:8px;
+}
+select{
+  width:100%;
+  padding:13px;
+  border:1px solid var(--border);
+  border-radius:9px;
+  background:white;
+  color:#172033;
+}
+input[type=range]{width:100%;accent-color:var(--primary)}
+.quality-info{
+  display:flex;
+  justify-content:space-between;
+  color:var(--muted);
+  font-size:12px;
+}
+.preview{
+  display:none;
+  margin-top:24px;
+  text-align:center;
+}
+.preview img{
+  display:block;
+  max-width:100%;
+  max-height:300px;
+  margin:15px auto;
+  border-radius:10px;
+  object-fit:contain;
+}
+.file-info{
+  background:#f1f3fa;
+  padding:12px;
+  border-radius:9px;
+  font-size:13px;
+  overflow-wrap:anywhere;
+}
+.convert-btn{width:100%;margin-top:10px}
+.convert-btn:disabled{opacity:.5;cursor:not-allowed}
+.result{
+  display:none;
+  margin-top:22px;
+  padding:18px;
+  border:1px solid #b9e4ca;
+  border-radius:12px;
+  background:#f0fff5;
+  text-align:center;
+}
+.result h3{color:#167443}
+.result p{font-size:13px;color:#456454;margin:8px 0 15px}
+.download-btn{background:#16834b}
+.message{
+  margin-top:15px;
+  font-size:13px;
+  color:#dc2626;
+  text-align:center;
+}
+footer{
+  text-align:center;
+  padding:25px;
+  color:var(--muted);
+  font-size:13px;
+}
+footer a{color:var(--primary);text-decoration:none}
+@media(max-width:500px){
+  .heading h1{font-size:26px}
+  .converter{padding:17px}
+  .upload{padding:28px 10px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="nav">
+    <div class="logo">Emadul<span>Ai</span></div>
+    <a href="index.html">Home</a>
+  </div>
+</header>
+
+<main class="container">
+
+  <div class="heading">
+    <h1>Image Converter</h1>
+    <p>Convert your images into JPG, PNG and WEBP formats for free.</p>
+  </div>
+
+  <section class="converter">
+
+    <label class="upload" for="imageInput" id="dropArea">
+      <svg viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="1.7">
+        <path d="M12 16V4m-5 5 5-5 5 5"/>
+        <path d="M4 16v4h16v-4"/>
+      </svg>
+      <h3>Upload Your Image</h3>
+      <p>Drag and drop or select an image from your device</p>
+      <span class="select-btn">Choose Image</span>
+      <input type="file" id="imageInput" accept="image/jpeg,image/png,image/webp">
+    </label>
+
+    <div class="preview" id="preview">
+      <h3>Image Preview</h3>
+      <img id="previewImage" alt="Selected image preview">
+      <div class="file-info" id="fileInfo"></div>
+    </div>
+
+    <div class="settings">
+
+      <div class="field">
+        <label for="format">Output Format</label>
+        <select id="format">
+          <option value="image/jpeg">JPG</option>
+          <option value="image/png">PNG</option>
+          <option value="image/webp">WEBP</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="quality">Image Quality</label>
+        <input type="range" id="quality"
+          min="10" max="100" value="90">
+        <div class="quality-info">
+          <span>Lower Size</span>
+          <strong id="qualityValue">90%</strong>
+          <span>Higher Quality</span>
+        </div>
+      </div>
+
+      <button class="convert-btn" id="convertBtn" disabled>
+        Convert Image
+      </button>
+
+      <div class="message" id="message" role="alert"></div>
+
+      <div class="result" id="result">
+        <h3>Conversion Successful!</h3>
+        <p id="resultInfo"></p>
+        <a id="downloadBtn" class="download-btn" href="#" download>
+          Download Image
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>© 2026 EmadulAi. All Rights Reserved.</p>
+  <p><a href="index.html">Back to Home</a></p>
+</footer>
+
+<script>
+const imageInput = document.getElementById("imageInput");
+const preview = document.getElementById("preview");
+const previewImage = document.getElementById("previewImage");
+const fileInfo = document.getElementById("fileInfo");
+const format = document.getElementById("format");
+const quality = document.getElementById("quality");
+const qualityValue = document.getElementById("qualityValue");
+const convertBtn = document.getElementById("convertBtn");
+const result = document.getElementById("result");
+const message = document.getElementById("message");
+const downloadBtn = document.getElementById("downloadBtn");
+const resultInfo = document.getElementById("resultInfo");
+const dropArea = document.getElementById("dropArea");
+
+let selectedImage = null;
+let previewURL = null;
+let convertedURL = null;
+
+function clearResult(){
+  result.style.display = "none";
+  message.textContent = "";
+
+  if(convertedURL){
+    URL.revokeObjectURL(convertedURL);
+    convertedURL = null;
+  }
+}
+
+function loadFile(file){
+  clearResult();
+
+  if(!file) return;
+
+  const allowed = [
+    "image/jpeg",
+    "image/png",
+    "image/webp"
+  ];
+
+  if(!allowed.includes(file.type)){
+    message.textContent = "Please select a JPG, PNG or WEBP image.";
+    return;
+  }
+
+  if(file.size > 20 * 1024 * 1024){
+    message.textContent = "Maximum file size is 20 MB.";
+    return;
+  }
+
+  selectedImage = file;
+
+  if(previewURL){
+    URL.revokeObjectURL(previewURL);
+  }
+
+  previewURL = URL.createObjectURL(file);
+  previewImage.src = previewURL;
+
+  fileInfo.textContent =
+    file.name + " | " + (file.size / 1024).toFixed(1) + " KB";
+
+  preview.style.display = "block";
+  convertBtn.disabled = false;
+}
+
+imageInput.addEventListener("change", function(){
+  loadFile(this.files[0]);
+});
+
+quality.addEventListener("input", function(){
+  qualityValue.textContent = this.value + "%";
+  clearResult();
+});
+
+format.addEventListener("change", clearResult);
+
+dropArea.addEventListener("dragover", function(event){
+  event.preventDefault();
+  dropArea.style.borderColor = "#635bff";
+});
+
+dropArea.addEventListener("dragleave", function(){
+  dropArea.style.borderColor = "#c8c8ed";
+});
+
+dropArea.addEventListener("drop", function(event){
+  event.preventDefault();
+  dropArea.style.borderColor = "#c8c8ed";
+  loadFile(event.dataTransfer.files[0]);
+});
+
+convertBtn.addEventListener("click", function(){
+
+  if(!selectedImage) return;
+
+  clearResult();
+  convertBtn.disabled = true;
+  convertBtn.textContent = "Converting...";
+
+  const image = new Image();
+
+  image.onload = function(){
+
+    try {
+      const canvas = document.createElement("canvas");
+      const context = canvas.getContext("2d");
+
+      canvas.width = image.naturalWidth;
+      canvas.height = image.naturalHeight;
+
+      if(format.value === "image/jpeg"){
+        context.fillStyle = "#ffffff";
+        context.fillRect(0, 0, canvas.width, canvas.height);
+      }
+
+      context.drawImage(image, 0, 0);
+
+      canvas.toBlob(function(blob){
+
+        if(!blob){
+          message.textContent = "Conversion failed. Try another image.";
+          convertBtn.disabled = false;
+          convertBtn.textContent = "Convert Image";
+          return;
+        }
+
+        convertedURL = URL.createObjectURL(blob);
+
+        const extensions = {
+          "image/jpeg": "jpg",
+          "image/png": "png",
+          "image/webp": "webp"
+        };
+
+        const originalName =
+          selectedImage.name.replace(/\.[^/.]+$/, "");
+
+        const fileName =
+          originalName + "-converted." + extensions[format.value];
+
+        downloadBtn.href = convertedURL;
+        downloadBtn.download = fileName;
+
+        resultInfo.textContent =
+          "Original: " +
+          (selectedImage.size / 1024).toFixed(1) +
+          " KB | Converted: " +
+          (blob.size / 1024).toFixed(1) +
+          " KB | " +
+          canvas.width + " × " + canvas.height + " px";
+
+        result.style.display = "block";
+        convertBtn.disabled = false;
+        convertBtn.textContent = "Convert Again";
+
+      }, format.value, Number(quality.value) / 100);
+
+    } catch(error){
+      message.textContent = "Unable to convert this image.";
+      convertBtn.disabled = false;
+      convertBtn.textContent = "Convert Image";
+    }
+  };
+
+  image.onerror = function(){
+    message.textContent = "Unable to read this image.";
+    convertBtn.disabled = false;
+    convertBtn.textContent = "Convert Image";
+  };
+
+  image.src = previewURL;
+});
+</script>
+
+</body>
+</html>
