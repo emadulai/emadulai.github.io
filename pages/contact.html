@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us — EmadulAi</title>
+  <meta name="description" content="Get in touch with the EmadulAi development and product support team." />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <link rel="stylesheet" href="../assets/css/components.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-container">
+      <a href="../index.html" class="brand-logo">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+        <span>Emadul<span class="ai">Ai</span></span>
+      </a>
+      <nav class="desktop-nav">
+        <a href="../index.html" class="nav-link">Home</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="contact.html" class="nav-link active">Contact</a>
+      </nav>
+      <div class="header-actions">
+        <button class="icon-btn" id="themeToggleBtn" aria-label="Toggle Theme"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg></button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container" style="padding: 60px 24px; max-width: 700px;">
+    <h1 style="font-size: 2.5rem; margin-bottom: 12px;">Contact Us</h1>
+    <p style="color: var(--color-text-muted); margin-bottom: 32px;">
+      Have a feature suggestion, tool bug report, or collaboration proposal? Reach out directly via our primary support channel.
+    </p>
+
+    <div style="background-color: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 36px; box-shadow: var(--shadow-sm);">
+      <form id="contactForm" onsubmit="event.preventDefault(); document.getElementById('contactFeedback').style.display='block';">
+        <div style="margin-bottom: 20px;">
+          <label style="display:block; font-weight:600; font-size:0.9rem; margin-bottom:8px;" for="cname">Your Name</label>
+          <input type="text" id="cname" required style="width:100%; padding:12px; border-radius:var(--radius-sm); border:1px solid var(--color-border); background:var(--color-bg); color:var(--color-text); font-size:0.95rem;" placeholder="e.g. Alex Morgan" />
+        </div>
+        <div style="margin-bottom: 20px;">
+          <label style="display:block; font-weight:600; font-size:0.9rem; margin-bottom:8px;" for="cemail">Your Email Address</label>
+          <input type="email" id="cemail" required style="width:100%; padding:12px; border-radius:var(--radius-sm); border:1px solid var(--color-border); background:var(--color-bg); color:var(--color-text); font-size:0.95rem;" placeholder="name@domain.com" />
+        </div>
+        <div style="margin-bottom: 20px;">
+          <label style="display:block; font-weight:600; font-size:0.9rem; margin-bottom:8px;" for="cmessage">Message</label>
+          <textarea id="cmessage" rows="5" required style="width:100%; padding:12px; border-radius:var(--radius-sm); border:1px solid var(--color-border); background:var(--color-bg); color:var(--color-text); font-size:0.95rem;" placeholder="Describe your request or issue..."></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%;">Prepare Message via Email</button>
+      </form>
+
+      <div id="contactFeedback" style="display:none; margin-top:20px; padding:16px; border-radius:var(--radius-sm); background:rgba(99,91,255,0.1); border:1px solid var(--color-primary); color:var(--color-text); font-size:0.9rem;">
+        To deliver your message without third-party tracking, please click here to send directly:
+        <a id="mailtoLink" href="mailto:contact@emadulai.in" style="color:var(--color-primary); font-weight:600; text-decoration:underline;">Send to contact@emadulai.in</a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-bottom">
+      <p>&copy; 2026 EmadulAi. All Rights Reserved.</p>
+      <a href="../index.html">Back to Home</a>
+    </div>
+  </footer>
+  <script src="../assets/js/tools.js"></script>
+  <script src="../assets/js/app.js"></script>
+</body>
+</html>
