@@ -1,473 +1,349 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Emadul | Creator & Web Developer</title>
-  
-  <!-- Font Awesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <title>EmadulAi — Powerful Free Online Tools for Everyone</title>
+  <meta name="description" content="Discover smart, fast, and easy-to-use online tools designed to simplify your everyday digital tasks. High performance, zero cost, and complete privacy." />
+  <link rel="canonical" href="https://emadulai.github.io/" />
 
-  <style>
-    :root {
-      --bg: #090d16;
-      --card-bg: rgba(22, 30, 49, 0.7);
-      --card-border: rgba(255, 255, 255, 0.08);
-      --primary: #06b6d4;
-      --primary-glow: rgba(6, 182, 212, 0.35);
-      --accent: #ff6b00;
-      --text: #f1f5f9;
-      --text-muted: #94a3b8;
-    }
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://emadulai.github.io/" />
+  <meta property="og:title" content="EmadulAi — Free Online Tools Suite" />
+  <meta property="og:description" content="Convert images, inspect code, format text, and generate secure tokens directly in your browser." />
+  <meta property="og:site_name" content="EmadulAi" />
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      scroll-behavior: smooth;
-    }
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="EmadulAi — Free Online Tools Suite" />
+  <meta name="twitter:description" content="Modern, instant browser-based digital utilities." />
 
-    body {
-      background-color: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/components.css" />
 
-    /* Background glow effect */
-    .glow-orb {
-      position: fixed;
-      width: 400px;
-      height: 400px;
-      border-radius: 50%;
-      background: radial-gradient(circle, var(--primary-glow) 0%, rgba(0,0,0,0) 70%);
-      top: -100px;
-      right: -100px;
-      z-index: -1;
-      pointer-events: none;
-    }
-
-    .glow-orb-2 {
-      position: fixed;
-      width: 350px;
-      height: 350px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(255, 107, 0, 0.15) 0%, rgba(0,0,0,0) 70%);
-      bottom: -50px;
-      left: -100px;
-      z-index: -1;
-      pointer-events: none;
-    }
-
-    /* Navbar */
-    header {
-      position: sticky;
-      top: 0;
-      backdrop-filter: blur(15px);
-      background: rgba(9, 13, 22, 0.85);
-      border-bottom: 1px solid var(--card-border);
-      z-index: 100;
-      padding: 18px 8%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .logo {
-      font-size: 22px;
-      font-weight: 800;
-      color: #fff;
-      text-decoration: none;
-      letter-spacing: 0.5px;
-    }
-
-    .logo span {
-      color: var(--primary);
-    }
-
-    nav ul {
-      display: flex;
-      list-style: none;
-      gap: 25px;
-    }
-
-    nav a {
-      color: var(--text-muted);
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: 600;
-      transition: color 0.3s;
-    }
-
-    nav a:hover {
-      color: var(--primary);
-    }
-
-    /* Container */
-    .container {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-
-    /* Hero Section */
-    .hero {
-      padding: 100px 0 80px;
-      text-align: center;
-    }
-
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6px 16px;
-      border-radius: 30px;
-      background: rgba(6, 182, 212, 0.1);
-      border: 1px solid rgba(6, 182, 212, 0.3);
-      color: var(--primary);
-      font-size: 13px;
-      font-weight: 600;
-      margin-bottom: 25px;
-    }
-
-    .hero-badge .dot {
-      width: 8px;
-      height: 8px;
-      background-color: var(--primary);
-      border-radius: 50%;
-      box-shadow: 0 0 8px var(--primary);
-    }
-
-    .hero h1 {
-      font-size: clamp(34px, 5vw, 56px);
-      font-weight: 800;
-      line-height: 1.2;
-      margin-bottom: 20px;
-    }
-
-    .hero h1 span {
-      background: linear-gradient(90deg, var(--primary), var(--accent));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .hero p {
-      max-width: 650px;
-      margin: 0 auto 35px;
-      color: var(--text-muted);
-      font-size: 16px;
-    }
-
-    .cta-group {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 12px 24px;
-      border-radius: 10px;
-      font-size: 14px;
-      font-weight: 700;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      cursor: pointer;
-    }
-
-    .btn-primary {
-      background: var(--primary);
-      color: #041017;
-      box-shadow: 0 4px 15px var(--primary-glow);
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px var(--primary-glow);
-    }
-
-    .btn-outline {
-      background: transparent;
-      color: var(--text);
-      border: 1px solid var(--card-border);
-    }
-
-    .btn-outline:hover {
-      background: rgba(255, 255, 255, 0.05);
-      border-color: rgba(255, 255, 255, 0.2);
-    }
-
-    /* Section Header */
-    .section-title {
-      text-align: center;
-      margin: 90px 0 50px;
-    }
-
-    .section-title h2 {
-      font-size: 32px;
-      font-weight: 700;
-      margin-bottom: 10px;
-    }
-
-    .section-title p {
-      color: var(--text-muted);
-      font-size: 15px;
-    }
-
-    /* Cards & Grids */
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 25px;
-    }
-
-    .glass-card {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 16px;
-      padding: 30px;
-      backdrop-filter: blur(10px);
-      transition: transform 0.3s ease, border-color 0.3s ease;
-    }
-
-    .glass-card:hover {
-      transform: translateY(-5px);
-      border-color: rgba(6, 182, 212, 0.4);
-    }
-
-    .card-icon {
-      width: 50px;
-      height: 50px;
-      border-radius: 12px;
-      background: rgba(6, 182, 212, 0.1);
-      color: var(--primary);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 22px;
-      margin-bottom: 20px;
-    }
-
-    .card-icon.accent {
-      background: rgba(255, 107, 0, 0.1);
-      color: var(--accent);
-    }
-
-    .glass-card h3 {
-      font-size: 20px;
-      margin-bottom: 12px;
-    }
-
-    .glass-card p {
-      color: var(--text-muted);
-      font-size: 14px;
-      line-height: 1.6;
-    }
-
-    /* Tech Stack Tags */
-    .tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 18px;
-    }
-
-    .tag {
-      padding: 4px 10px;
-      border-radius: 6px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--card-border);
-      font-size: 12px;
-      color: var(--text-muted);
-    }
-
-    /* Contact Section */
-    .contact-box {
-      background: linear-gradient(135deg, rgba(6, 182, 212, 0.1) 0%, rgba(255, 107, 0, 0.05) 100%);
-      border: 1px solid var(--card-border);
-      border-radius: 20px;
-      padding: 50px 30px;
-      text-align: center;
-      margin: 80px 0;
-    }
-
-    .contact-box h2 {
-      font-size: 30px;
-      margin-bottom: 15px;
-    }
-
-    .social-links {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      margin-top: 25px;
-    }
-
-    .social-btn {
-      width: 44px;
-      height: 44px;
-      border-radius: 10px;
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      color: var(--text);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-      text-decoration: none;
-      transition: all 0.2s;
-    }
-
-    .social-btn:hover {
-      background: var(--primary);
-      color: #041017;
-      transform: translateY(-3px);
-    }
-
-    /* Footer */
-    footer {
-      border-top: 1px solid var(--card-border);
-      text-align: center;
-      padding: 30px 20px;
-      color: var(--text-muted);
-      font-size: 13px;
-    }
-
-    @media (max-width: 768px) {
-      nav { display: none; }
-      .hero { padding: 60px 0 40px; }
-      .contact-box { padding: 35px 20px; }
-    }
-  </style>
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "EmadulAi",
+    "url": "https://emadulai.github.io",
+    "description": "Comprehensive suite of free browser-based online tools and utilities.",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "All"
+  }
+  </script>
 </head>
 <body>
 
-  <div class="glow-orb"></div>
-  <div class="glow-orb-2"></div>
+  <!-- Off-Canvas Sidebar Drawer -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+  <aside class="app-sidebar" id="appSidebar" aria-label="Sidebar Navigation">
+    <div class="sidebar-header">
+      <a href="index.html" class="brand-logo">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 10V3L4 14h7v7l9-11h-7z" />
+        </svg>
+        <span>Emadul<span class="ai">Ai</span></span>
+      </a>
+      <button class="icon-btn" id="sidebarCloseBtn" aria-label="Close Sidebar">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
 
-  <!-- Header -->
-  <header>
-    <a href="#" class="logo">Emadul<span>Ai</span></a>
-    <nav>
-      <ul>
-        <li><a href="#about">About</a></li>
-        <li><a href="#services">Services</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
+    <div class="sidebar-body">
+      <nav>
+        <div class="sidebar-group-title">Platform</div>
+        <ul class="sidebar-nav-list">
+          <li>
+            <a href="index.html" class="sidebar-link active">
+              <span class="sidebar-link-content">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+                Home
+              </span>
+            </a>
+          </li>
+          <li>
+            <a href="#all-tools" class="sidebar-link">
+              <span class="sidebar-link-content">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
+                All Tools
+              </span>
+            </a>
+          </li>
+          <li>
+            <a href="#favorites-section" class="sidebar-link">
+              <span class="sidebar-link-content">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+                Favorites
+              </span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <nav>
+        <div class="sidebar-group-title">Company & Legal</div>
+        <ul class="sidebar-nav-list">
+          <li><a href="pages/about.html" class="sidebar-link">About Us</a></li>
+          <li><a href="pages/contact.html" class="sidebar-link">Contact</a></li>
+          <li><a href="pages/privacy-policy.html" class="sidebar-link">Privacy Policy</a></li>
+          <li><a href="pages/terms.html" class="sidebar-link">Terms of Service</a></li>
+          <li><a href="pages/disclaimer.html" class="sidebar-link">Disclaimer</a></li>
+          <li><a href="pages/faq.html" class="sidebar-link">FAQ</a></li>
+        </ul>
+      </nav>
+    </div>
+  </aside>
+
+  <!-- Sticky Header -->
+  <header class="site-header">
+    <div class="container header-container">
+      <div class="header-left">
+        <button class="icon-btn mobile-toggle" id="sidebarToggleBtn" aria-label="Open Navigation Menu">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+        <a href="index.html" class="brand-logo">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 10V3L4 14h7v7l9-11h-7z" />
+          </svg>
+          <span>Emadul<span class="ai">Ai</span></span>
+        </a>
+      </div>
+
+      <nav class="desktop-nav">
+        <a href="index.html" class="nav-link active">Home</a>
+        <a href="#all-tools" class="nav-link">All Tools</a>
+        <a href="#favorites-section" class="nav-link">Favorites</a>
+        <a href="pages/about.html" class="nav-link">About</a>
+        <a href="pages/contact.html" class="nav-link">Contact</a>
+      </nav>
+
+      <div class="header-actions">
+        <button class="icon-btn" id="themeToggleBtn" aria-label="Toggle Color Theme" title="Toggle Theme">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+          </svg>
+        </button>
+      </div>
+    </div>
   </header>
 
-  <main class="container">
+  <!-- Main Workspace -->
+  <main>
     <!-- Hero Section -->
-    <section class="hero" id="about">
-      <div class="hero-badge">
-        <span class="dot"></span> Available for Web Projects & Development
-      </div>
-      <h1>ডিজিটাল উদ্ভাবন ও আধুনিক <br><span>ওয়েব ডেভেলপমেন্ট সলিউশন</span></h1>
-      <p>আমি এমাদুল — ওয়েব অ্যাপ্লিকেশন, ডিজিটাল কনটেন্ট ক্রিয়েশন এবং ইউজার-ফ্রেন্ডলি টুলস তৈরির কাজ করি। আপনার চিন্তাকে বাস্তবে রূপ দিতে আধুনিক কোডিং ও ডিজাইনিং ব্যবহার করি।</p>
-      <div class="cta-group">
-        <a href="#projects" class="btn btn-primary"><i class="fas fa-layer-group"></i> কাজগুলো দেখুন</a>
-        <a href="#contact" class="btn btn-outline"><i class="fas fa-paper-plane"></i> যোগাযোগ করুন</a>
-      </div>
-    </section>
-
-    <!-- Services Section -->
-    <section id="services">
-      <div class="section-title">
-        <h2>আমার সেবাসমূহ</h2>
-        <p>ব্যবসায়িক ও ব্যক্তিগত কাজের জন্য দ্রুত ও নিখুঁত প্রযুক্তিগত সেবা</p>
-      </div>
-
-      <div class="grid">
-        <div class="glass-card">
-          <div class="card-icon"><i class="fas fa-code"></i></div>
-          <h3>ওয়েব ডেভেলপমেন্ট</h3>
-          <p>এইচটিএমএল, সিএসএস, জাভাস্ক্রিপ্ট ও আধুনিক ওয়েব প্রযুক্তির সাহায্যে রেসপন্সিভ ও ফাস্ট-লোডিং ওয়েবসাইট তৈরি।</p>
-          <div class="tags">
-            <span class="tag">HTML5</span>
-            <span class="tag">CSS3</span>
-            <span class="tag">JavaScript</span>
-            <span class="tag">Web Tools</span>
-          </div>
+    <section class="hero-section">
+      <div class="container">
+        <div class="hero-pill">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+          100% Free & Client-Side Tools
+        </div>
+        <h1 class="hero-title">Powerful Free Online Tools <span>for Everyone</span></h1>
+        <p class="hero-description">Discover smart, fast, and easy-to-use online tools designed to simplify your everyday digital tasks with maximum performance and complete privacy.</p>
+        
+        <div class="hero-actions">
+          <a href="#all-tools" class="btn btn-primary">
+            Explore All Tools
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </a>
+          <a href="#categories-nav" class="btn btn-secondary">Browse Categories</a>
         </div>
 
-        <div class="glass-card">
-          <div class="card-icon accent"><i class="fas fa-paint-brush"></i></div>
-          <h3>UI/UX ও গ্রাফিক্স ডিজাইন</h3>
-          <p>সোশ্যাল মিডিয়া ব্যানার, কাস্টম ওয়েব ইন্টারফেস এবং ডিজিটাল ডকুমেন্টের জন্য আই-ক্যাচিং ভিজ্যুয়াল ডিজাইন।</p>
-          <div class="tags">
-            <span class="tag">Glassmorphism</span>
-            <span class="tag">Banners</span>
-            <span class="tag">Branding</span>
+        <!-- Global Search Bar -->
+        <div class="search-wrapper">
+          <div class="search-box">
+            <svg class="search-icon-left" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+            <input type="text" id="globalSearchInput" class="search-input" placeholder="Search any tool (e.g., converter, word counter, json)..." aria-label="Search tools" />
+            <button class="search-clear-btn" id="searchClearBtn" aria-label="Clear Search Input">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
           </div>
-        </div>
-
-        <div class="glass-card">
-          <div class="card-icon"><i class="fas fa-cogs"></i></div>
-          <h3>ডিজিটাল অটোমেশন ও টুলস</h3>
-          <p>অর্ডার ম্যানেজমেন্ট, অটোমেটেড ফর্ম এবং অনলাইন প্রক্রিয়াকরণের জন্য কার্যকর ওয়েব অ্যাপ্লিকেশন সমাধান।</p>
-          <div class="tags">
-            <span class="tag">Automation</span>
-            <span class="tag">APIs</span>
-            <span class="tag">Portals</span>
+          <div class="search-meta">
+            <span>Instant search by name, tag, or utility</span>
+            <span id="searchResultsCount"></span>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Projects Section -->
-    <section id="projects">
-      <div class="section-title">
-        <h2>উল্লেখযোগ্য প্রজেক্টসমূহ</h2>
-        <p>আমার তৈরি কিছু সাম্প্রতিক টুলস ও ওয়েব প্রজেক্ট</p>
+    <!-- Main All Tools Section -->
+    <section class="container" id="all-tools" style="padding-top: 40px;">
+      <div id="categories-nav"></div>
+      <div class="category-filter-bar" id="categoryFilterBar"></div>
+
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <h2>Tool Directory</h2>
+          <p>Instant utilities configured in our central registry</p>
+        </div>
       </div>
 
-      <div class="grid">
-        <div class="glass-card">
-          <h3>ওয়েব অ্যাপ্লিকেশন পোর্টাল</h3>
-          <p>ব্যবহারকারীদের জন্য সম্পূর্ণ প্রতিক্রিয়াশীল ও আধুনিক কন্ট্রোল প্যানেল সমৃদ্ধ ওয়েব অ্যাপ্লিকেশন।</p>
-          <div class="tags" style="margin-top: 15px;">
-            <span class="tag">Live Project</span>
-            <span class="tag">Frontend</span>
+      <div class="tools-grid" id="toolsGridContainer"></div>
+    </section>
+
+    <!-- Favorites Section -->
+    <section class="container" id="favorites-section" style="padding-top: 40px;">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <h2>Your Starred Favorites</h2>
+          <p>Saved in local browser memory for quick daily access</p>
+        </div>
+      </div>
+      <div class="tools-grid" id="favoritesGridContainer"></div>
+    </section>
+
+    <!-- Recently Used Section -->
+    <section class="container" id="recent-section" style="padding-top: 40px;">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <h2>Recently Used</h2>
+          <p>Your recent visits across the EmadulAi suite</p>
+        </div>
+      </div>
+      <div class="tools-grid" id="recentGridContainer"></div>
+    </section>
+
+    <!-- Why Choose EmadulAi -->
+    <section class="container" style="padding-top: 60px;">
+      <div class="section-header" style="text-align: center; justify-content: center;">
+        <div class="section-title-wrap">
+          <h2>Why Choose EmadulAi</h2>
+          <p>Built strictly for speed, reliability, and zero friction</p>
+        </div>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-box">
+          <div class="feature-icon">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
           </div>
+          <h3>Client-Side Speed</h3>
+          <p>Algorithms execute locally inside your modern web browser. No unnecessary server hops or roundtrip queue delays.</p>
         </div>
 
-        <div class="glass-card">
-          <h3>কাস্টম ইউটিলিটি টুলস</h3>
-          <p>দৈনন্দিন ডিজিটাল কাজ দ্রুত ও সহজ করার জন্য নির্মিত কাস্টম শর্টনার ও কনভার্টার ইঞ্জিন।</p>
-          <div class="tags" style="margin-top: 15px;">
-            <span class="tag">Web App</span>
-            <span class="tag">Automation</span>
+        <div class="feature-box">
+          <div class="feature-icon">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
           </div>
+          <h3>Guaranteed Privacy</h3>
+          <p>Files, passwords, and data payloads are never uploaded or persisted on external database backends.</p>
+        </div>
+
+        <div class="feature-box">
+          <div class="feature-icon">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <h3>Completely Free</h3>
+          <p>Unlimited access without subscription walls, locked tiers, forced sign-up credentials, or hidden charges.</p>
         </div>
       </div>
     </section>
 
-    <!-- Contact Section -->
-    <section class="contact-box" id="contact">
-      <h2>একসাথে কাজ শুরু করতে প্রস্তুত?</h2>
-      <p style="color: var(--text-muted); max-width: 500px; margin: 0 auto;">যেকোনো ধরণের ওয়েব ডেভেলপমেন্ট, পরামর্শ বা প্রজেক্টের জন্য সরাসরি যোগাযোগ করতে পারেন।</p>
-      <div class="social-links">
-        <a href="https://github.com/emadulai" target="_blank" class="social-btn" title="GitHub"><i class="fab fa-github"></i></a>
-        <a href="mailto:contact@emadulai.in" class="social-btn" title="Email"><i class="fas fa-envelope"></i></a>
-        <a href="https://youtube.com" target="_blank" class="social-btn" title="YouTube"><i class="fab fa-youtube"></i></a>
+    <!-- FAQ Section -->
+    <section class="container">
+      <div class="section-header" style="text-align: center; justify-content: center;">
+        <div class="section-title-wrap">
+          <h2>Frequently Asked Questions</h2>
+          <p>Everything you need to know about our browser tools</p>
+        </div>
+      </div>
+
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-question">
+            Are my files or text processed securely?
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div class="faq-answer">
+            Yes. EmadulAi runs directly inside your browser using standard client-side Web APIs (HTML5 Canvas, FileReader, Web Crypto). Your data never leaves your device.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            Do I have to create an account or sign in?
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div class="faq-answer">
+            No registration or account creation is required. Every tool is immediately available without entering credentials or personal information.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            How are my favorites and recent history stored?
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div class="faq-answer">
+            Favorites and recently visited records are preserved solely in your local browser storage (`localStorage`). No tracking data is sent to external servers.
+          </div>
+        </div>
       </div>
     </section>
   </main>
 
-  <!-- Footer -->
-  <footer>
-    <p>&copy; 2026 EmadulAi. All rights reserved. Hosted completely free on GitHub Pages.</p>
+  <!-- Multi-column Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="brand-logo">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+            <span>Emadul<span class="ai">Ai</span></span>
+          </a>
+          <p>A streamlined, accessible suite of high-performance digital tools engineered for creators, developers, students, and professionals.</p>
+        </div>
+
+        <div class="footer-column">
+          <h3>Explore</h3>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#all-tools">All Tools</a></li>
+            <li><a href="#favorites-section">Favorites</a></li>
+            <li><a href="#recent-section">Recently Used</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h3>Information</h3>
+          <ul>
+            <li><a href="pages/about.html">About Us</a></li>
+            <li><a href="pages/contact.html">Contact Us</a></li>
+            <li><a href="pages/faq.html">FAQ</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h3>Legal</h3>
+          <ul>
+            <li><a href="pages/privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="pages/terms.html">Terms of Service</a></li>
+            <li><a href="pages/disclaimer.html">Disclaimer</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 EmadulAi. All Rights Reserved.</p>
+        <p>Inquiries: <a href="mailto:contact@emadulai.in" style="color: var(--color-primary);">contact@emadulai.in</a></p>
+      </div>
+    </div>
   </footer>
 
+  <!-- Scripts -->
+  <script src="assets/js/tools.js"></script>
+  <script src="assets/js/app.js"></script>
 </body>
 </html>
